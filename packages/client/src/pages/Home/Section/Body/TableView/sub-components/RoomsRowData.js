@@ -36,8 +36,7 @@ const RoomsRowDataComponent = (props) => {
           selectionProp?.className,
           "table-container_file-name-cell"
         )}
-        value={value}
-      >
+        value={value}>
         <FileNameCell
           theme={theme}
           onContentSelect={onContentFileSelect}
@@ -58,8 +57,7 @@ const RoomsRowDataComponent = (props) => {
               ? { background: "none !important" }
               : dragStyles.style
           }
-          {...selectionProp}
-        >
+          {...selectionProp}>
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
@@ -76,8 +74,7 @@ const RoomsRowDataComponent = (props) => {
               ? { background: "none !important" }
               : dragStyles.style
           }
-          {...selectionProp}
-        >
+          {...selectionProp}>
           <TagsCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
@@ -94,8 +91,7 @@ const RoomsRowDataComponent = (props) => {
               ? { background: "none" }
               : dragStyles.style
           }
-          {...selectionProp}
-        >
+          {...selectionProp}>
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
@@ -112,8 +108,7 @@ const RoomsRowDataComponent = (props) => {
               ? { background: "none" }
               : dragStyles.style
           }
-          {...selectionProp}
-        >
+          {...selectionProp}>
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}

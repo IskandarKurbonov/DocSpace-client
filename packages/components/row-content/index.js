@@ -12,7 +12,7 @@ import {
 } from "./styled-row-content";
 import { useTheme } from "styled-components";
 
-const getSideInfo = (content, convert, interfaceDirection = "ltr") => {
+const getSideInfo = (content, convert, interfaceDirection = "ltr", id, idx) => {
   let info = [];
   let child = null;
   const lastIndex = content.length - 1;
@@ -35,6 +35,7 @@ const getSideInfo = (content, convert, interfaceDirection = "ltr") => {
 
   return interfaceDirection === "ltr" ? (
     <>
+      {idx && `idx ${id || Math.random()} | `}
       {info.join(" | ")}
       {child}
     </>
@@ -51,6 +52,7 @@ const RowContent = (props) => {
     children,
     disableSideInfo,
     id,
+    idx,
     className,
     style,
     sideColor,
@@ -58,10 +60,14 @@ const RowContent = (props) => {
     sectionWidth,
     convertSideInfo,
   } = props;
-
   const { interfaceDirection } = useTheme();
-
-  const sideInfo = getSideInfo(children, convertSideInfo, interfaceDirection);
+  const sideInfo = getSideInfo(
+    children,
+    convertSideInfo,
+    interfaceDirection,
+    id,
+    idx
+  );
   const mainContainerWidth =
     children[0].props && children[0].props.containerWidth;
 

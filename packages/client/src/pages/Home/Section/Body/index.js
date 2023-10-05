@@ -256,7 +256,7 @@ const SectionBodyContent = (props) => {
   if (isEmptyFilesList && movingInProgress) return <></>;
 
   const isEmptyPage = isEmptyFilesList;
-
+  const idx = false;
   return (
     <Consumer>
       {(context) =>
@@ -270,11 +270,16 @@ const SectionBodyContent = (props) => {
           </>
         ) : viewAs === "table" ? (
           <>
-            <TableView sectionWidth={context.sectionWidth} tReady={tReady} />
+            <TableView
+              sectionWidth={context.sectionWidth}
+              tReady={tReady}
+              idx={idx}
+            />
           </>
         ) : (
           <>
             <FilesRowContainer
+              idx={idx}
               sectionWidth={context.sectionWidth}
               tReady={tReady}
             />

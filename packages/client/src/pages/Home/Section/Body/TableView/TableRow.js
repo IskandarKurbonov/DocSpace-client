@@ -14,6 +14,7 @@ import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
 const FilesTableRow = (props) => {
   const {
     t,
+    idx,
     fileContextClick,
     item,
     checkedProps,
@@ -116,8 +117,7 @@ const FilesTableRow = (props) => {
       onMouseDown={onMouseDown}
       dragging={dragging && isDragging}
       onDragOver={onDragOver}
-      onDragLeave={onDragLeave}
-    >
+      onDragLeave={onDragLeave}>
       <StyledTableRow
         className="table-row"
         {...dragStyles}
@@ -144,8 +144,7 @@ const FilesTableRow = (props) => {
         }
         isRoom={item.isRoom}
         isHighlight={isHighlight}
-        hideColumns={hideColumns}
-      >
+        hideColumns={hideColumns}>
         {isRooms ? (
           <RoomsRowDataComponent
             element={element}
@@ -161,6 +160,7 @@ const FilesTableRow = (props) => {
         ) : (
           <RowDataComponent
             element={element}
+            idx={idx}
             dragStyles={dragStyles}
             selectionProp={selectionProp}
             {...props}

@@ -13,7 +13,7 @@ const StyledRowContainer = styled(RowContainer)`
     .row-selected {
       .files-row {
         border-top: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+          `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
         margin-top: -1px;
         padding-top: 0px;
         padding-bottom: 1px;
@@ -24,7 +24,7 @@ const StyledRowContainer = styled(RowContainer)`
   .row-selected + .row-wrapper:not(.row-selected) {
     .files-row {
       border-top: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -3px;
       ${marginStyles}
     }
@@ -35,7 +35,7 @@ const StyledRowContainer = styled(RowContainer)`
     + .row-selected {
     .files-row {
       border-top: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -3px;
       ${marginStyles}
     }
@@ -50,7 +50,7 @@ const StyledRowContainer = styled(RowContainer)`
   .row-selected:last-child {
     .files-row {
       border-bottom: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       ${marginStyles}
     }
     .files-row::after {
@@ -60,7 +60,7 @@ const StyledRowContainer = styled(RowContainer)`
   .row-selected:first-child {
     .files-row {
       border-top: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -2px;
       padding-top: 1px;
       padding-bottom: 1px;
@@ -75,6 +75,7 @@ const FilesRowContainer = ({
   filesList,
   sectionWidth,
   viewAs,
+  idx,
   setViewAs,
   infoPanelVisible,
   filterTotal,
@@ -87,7 +88,6 @@ const FilesRowContainer = ({
 }) => {
   useEffect(() => {
     const width = window.innerWidth;
-
 
     if ((viewAs !== "table" && viewAs !== "row") || !sectionWidth) return;
     // 400 - it is desktop info panel width
@@ -111,6 +111,7 @@ const FilesRowContainer = ({
           item?.version ? `${item.id}_${item.version}` : `${item.id}_${index}`
         }
         item={item}
+        idx={idx}
         itemIndex={index}
         sectionWidth={sectionWidth}
         isRooms={isRooms}
@@ -128,7 +129,6 @@ const FilesRowContainer = ({
     highlightFile.isExst,
     isTrashFolder,
   ]);
-
   return (
     <StyledRowContainer
       className="files-row-container"
@@ -138,8 +138,7 @@ const FilesRowContainer = ({
       hasMoreFiles={hasMoreFiles}
       draggable
       useReactWindow={!withPaging}
-      itemHeight={59}
-    >
+      itemHeight={59}>
       {filesListNode}
     </StyledRowContainer>
   );

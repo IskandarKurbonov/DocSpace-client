@@ -294,6 +294,7 @@ const SimpleFilesRow = (props) => {
     getContextModel,
     showHotkeyBorder,
     id,
+    idx,
     isRooms,
 
     folderCategory,
@@ -352,8 +353,7 @@ const SimpleFilesRow = (props) => {
           : checkedProps || isActive
           ? "row-selected"
           : ""
-      }`}
-    >
+      }`}>
       <DragAndDrop
         data-title={item.title}
         value={value}
@@ -363,8 +363,7 @@ const SimpleFilesRow = (props) => {
         dragging={dragging && isDragging}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
-        style={dragStyles}
-      >
+        style={dragStyles}>
         <StyledSimpleFilesRow
           key={item.id}
           data={item}
@@ -397,10 +396,10 @@ const SimpleFilesRow = (props) => {
           isSmallContainer={isSmallContainer}
           isRooms={isRooms}
           folderCategory={folderCategory}
-          isHighlight={isHighlight}
-        >
+          isHighlight={isHighlight}>
           <FilesRowContent
             item={item}
+            idx={idx}
             sectionWidth={sectionWidth}
             onFilesClick={onFilesClick}
             quickButtons={

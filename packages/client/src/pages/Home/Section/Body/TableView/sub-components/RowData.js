@@ -20,7 +20,8 @@ const RowDataComponent = (props) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
-
+    idx,
+    id,
     dragStyles,
     selectionProp,
     value,
@@ -33,17 +34,19 @@ const RowDataComponent = (props) => {
     badgesComponent,
     quickButtonsComponent,
   } = props;
-
   return (
     <>
-      <TableCell
-        {...dragStyles}
-        className={classNames(
-          selectionProp?.className,
-          "table-container_file-name-cell"
-        )}
-        value={value}
-      >
+      {idx && (
+        <TableCell
+          {...dragStyles}
+          className={classNames(
+            selectionProp?.className,
+            "table-container_file-name-cell"
+          )}>
+          {id}
+        </TableCell>
+      )}
+      <TableCell {...dragStyles} value={value}>
         <FileNameCell
           theme={theme}
           onContentSelect={onContentFileSelect}
@@ -62,8 +65,7 @@ const RowDataComponent = (props) => {
           style={
             !authorColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
-          {...selectionProp}
-        >
+          {...selectionProp}>
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
@@ -80,8 +82,7 @@ const RowDataComponent = (props) => {
               ? { background: "none !important" }
               : dragStyles.style
           }
-          {...selectionProp}
-        >
+          {...selectionProp}>
           <DateCell
             create
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -97,8 +98,7 @@ const RowDataComponent = (props) => {
           style={
             !modifiedColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
-          {...selectionProp}
-        >
+          {...selectionProp}>
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
@@ -113,8 +113,7 @@ const RowDataComponent = (props) => {
           style={
             !sizeColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
-          {...selectionProp}
-        >
+          {...selectionProp}>
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
@@ -131,8 +130,7 @@ const RowDataComponent = (props) => {
               ? { background: "none !important" }
               : dragStyles.style
           }
-          {...selectionProp}
-        >
+          {...selectionProp}>
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
@@ -152,8 +150,7 @@ const RowDataComponent = (props) => {
           className={classNames(
             selectionProp?.className,
             "table-container_quick-buttons-wrapper"
-          )}
-        >
+          )}>
           <StyledQuickButtonsContainer>
             {quickButtonsComponent}
           </StyledQuickButtonsContainer>

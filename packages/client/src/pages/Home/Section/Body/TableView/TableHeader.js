@@ -17,6 +17,7 @@ class FilesTableHeader extends React.Component {
   getTableColumns = (fromUpdate = false) => {
     const {
       t,
+      idx,
       isRooms,
       isTrashFolder,
       getColumns,
@@ -24,9 +25,7 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       isPublicRoom,
     } = this.props;
-
     const defaultColumns = [];
-
     if (isRooms) {
       const columns = [
         {
@@ -223,6 +222,16 @@ class FilesTableHeader extends React.Component {
         },
       ];
       defaultColumns.push(...columns);
+      idx &&
+        defaultColumns.unshift({
+          key: "Index",
+          title: "Idx",
+          resizable: true,
+          enable: true,
+          default: true,
+          minWidth: 50,
+        });
+      console.log(defaultColumns);
     }
 
     const columns = getColumns(defaultColumns);
