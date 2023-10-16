@@ -2,11 +2,12 @@ import React, { useEffect, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import RowContainer from "@docspace/components/row-container";
 import SimpleFilesRow from "./SimpleFilesRow";
-import { isMobile } from "react-device-detect";
+
 import styled, { css } from "styled-components";
 import marginStyles from "./CommonStyles";
 import { isTablet } from "@docspace/components/utils/device";
 import { Base } from "@docspace/components/themes";
+import { DeviceType } from "@docspace/common/constants";
 
 const StyledRowContainer = styled(RowContainer)`
   .row-list-item:first-child {
@@ -85,6 +86,7 @@ const FilesRowContainer = ({
   isTrashFolder,
   withPaging,
   highlightFile,
+  currentDeviceType,
 }) => {
   useEffect(() => {
     const width = window.innerWidth;
@@ -95,13 +97,13 @@ const FilesRowContainer = ({
       (width < 1025 && !infoPanelVisible) ||
       ((width < 625 || (viewAs === "row" && width < 1025)) &&
         infoPanelVisible) ||
-      isMobile
+      currentDeviceType !== DeviceType.desktop
     ) {
       viewAs !== "row" && setViewAs("row");
     } else {
       viewAs !== "table" && setViewAs("table");
     }
-  }, [sectionWidth]);
+  }, [sectionWidth, currentDeviceType]);
 
   const filesListNode = useMemo(() => {
     return filesList.map((item, index) => (
@@ -157,7 +159,7 @@ export default inject(({ filesStore, auth, treeFoldersStore }) => {
   } = filesStore;
   const { isVisible: infoPanelVisible } = auth.infoPanelStore;
   const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
-  const { withPaging } = auth.settingsStore;
+  const { withPaging, currentDeviceType } = auth.settingsStore;
 
   const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -173,5 +175,6 @@ export default inject(({ filesStore, auth, treeFoldersStore }) => {
     isTrashFolder,
     withPaging,
     highlightFile,
+    currentDeviceType,
   };
 })(observer(FilesRowContainer));

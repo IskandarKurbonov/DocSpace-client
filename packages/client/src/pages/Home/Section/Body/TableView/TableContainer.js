@@ -6,9 +6,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
 import TableBody from "@docspace/components/table-container/TableBody";
-import { isMobile } from "react-device-detect";
+
 import styled, { css } from "styled-components";
 import { Base } from "@docspace/components/themes";
+import { DeviceType } from "@docspace/common/constants";
 
 const marginCss = css`
   margin-top: -1px;
@@ -141,6 +142,7 @@ const Table = ({
   columnStorageName,
   columnInfoPanelStorageName,
   highlightFile,
+  currentDeviceType,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -159,13 +161,13 @@ const Table = ({
       (width < 1025 && !infoPanelVisible) ||
       ((width < 625 || (viewAs === "row" && width < 1025)) &&
         infoPanelVisible) ||
-      isMobile
+      currentDeviceType !== DeviceType.desktop
     ) {
       viewAs !== "row" && setViewAs("row");
     } else {
       viewAs !== "table" && setViewAs("table");
     }
-  }, [sectionWidth]);
+  }, [sectionWidth, currentDeviceType]);
 
   useEffect(() => {
     return () => {
@@ -260,7 +262,8 @@ const Table = ({
         useReactWindow={!withPaging}
         infoPanelVisible={infoPanelVisible}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        itemHeight={49}>
+        itemHeight={49}
+      >
         {filesListNode}
       </TableBody>
     </StyledTableContainer>
@@ -288,7 +291,7 @@ export default inject(({ filesStore, treeFoldersStore, auth, tableStore }) => {
     highlightFile,
   } = filesStore;
 
-  const { withPaging, theme } = auth.settingsStore;
+  const { withPaging, theme, currentDeviceType } = auth.settingsStore;
 
   return {
     filesList,
@@ -308,5 +311,6 @@ export default inject(({ filesStore, treeFoldersStore, auth, tableStore }) => {
     columnStorageName,
     columnInfoPanelStorageName,
     highlightFile,
+    currentDeviceType,
   };
 })(observer(Table));
