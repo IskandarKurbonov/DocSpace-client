@@ -75,6 +75,13 @@ class FilesTableHeader extends React.Component {
           onChange: this.onColumnChange,
           onClick: this.onRoomsFilter,
         },
+        {
+          key: "QuickButtons",
+          title: "",
+          enable: this.props.roomColumnQuickButtonsIsEnabled,
+          defaultSize: 75,
+          resizable: false,
+        },
       ];
       defaultColumns.push(...columns);
     } else if (isTrashFolder) {
@@ -497,6 +504,7 @@ export default inject(
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
       roomColumnOwnerIsEnabled,
+      roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
 
       getColumns,
@@ -545,6 +553,7 @@ export default inject(
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
       roomColumnOwnerIsEnabled,
+      roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
 
       getColumns,
