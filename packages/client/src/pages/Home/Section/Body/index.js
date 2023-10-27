@@ -264,7 +264,7 @@ const SectionBodyContent = (props) => {
   if (isEmptyFilesList && movingInProgress) return <></>;
 
   const isEmptyPage = isEmptyFilesList;
-  const idx = false;
+  const idx = true;
   return (
     <Consumer>
       {(context) =>

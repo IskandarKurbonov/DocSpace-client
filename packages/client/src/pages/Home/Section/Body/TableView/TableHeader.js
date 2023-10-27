@@ -238,7 +238,10 @@ class FilesTableHeader extends React.Component {
           default: true,
           minWidth: 50,
         });
-      console.log(defaultColumns);
+      console.log(
+        defaultColumns,
+        "defaultColumns==================================="
+      );
     }
 
     const columns = getColumns(defaultColumns);

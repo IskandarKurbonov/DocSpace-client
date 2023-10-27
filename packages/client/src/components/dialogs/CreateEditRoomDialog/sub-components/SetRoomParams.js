@@ -18,6 +18,8 @@ import { getRoomTypeDefaultTagTranslation } from "../data";
 
 import ImageEditor from "@docspace/components/ImageEditor";
 import PreviewTile from "@docspace/components/ImageEditor/PreviewTile";
+import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
+import { RoomsType } from "@docspace/common/constants";
 import Text from "@docspace/components/text";
 import ChangeRoomOwner from "./ChangeRoomOwner";
 
@@ -61,6 +63,7 @@ const SetRoomParams = ({
 
   const isMe = userId === roomParams?.roomOwner?.id;
   const canChangeRoomOwner = (isAdmin || isMe) && roomParams.roomOwner;
+  const isVDRRoom = roomParams.type === RoomsType.VirtualDataRoom;
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -137,6 +140,41 @@ const SetRoomParams = ({
           roomOwner={roomParams.roomOwner}
           onOwnerChange={onOwnerChange}
         />
+      )}
+
+      {isVDRRoom && <VirtualDataRoomBlock t={t} />}
+
+      {canOwnerChange && roomParams.roomOwner && (
+        <div>
+          <Text fontWeight={600} fontSize="13px">
+            {t("Files:RoomOwner")}
+          </Text>
+
+          <div className="room-owner-block">
+            <StyledIcon
+              className="react-svg-icon"
+              src={roomParams.roomOwner.avatarSmall}
+            />
+            <div className="owner-display-name-block">
+              <Text fontWeight={600} fontSize="13px">
+                {roomParams.roomOwner.displayName}
+              </Text>
+              {isMe && (
+                <Text className="me-label">({t("Common:MeLabel")})</Text>
+              )}
+            </div>
+          </div>
+
+          <Link
+            isHovered
+            type="action"
+            fontWeight={600}
+            fontSize="13px"
+            className="change-owner-link"
+            onClick={onOwnerChange}>
+            {t("Common:ChangeButton")}
+          </Link>
+        </div>
       )}
 
       {!isEdit && enableThirdParty && (

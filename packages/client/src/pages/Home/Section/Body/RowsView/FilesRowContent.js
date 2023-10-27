@@ -218,12 +218,12 @@ const FilesRowContent = ({
         return updatedDate;
     }
   };
-
+  console.log(id, "==============================");
   return (
     <>
       <SimpleFilesRowContent
         idx={idx}
-        id={id}
+        id={id.toString()}
         sectionWidth={sectionWidth}
         isMobile={!isTablet()}
         isFile={fileExst || contentLength}
