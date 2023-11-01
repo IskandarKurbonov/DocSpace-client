@@ -144,7 +144,7 @@ const SetRoomParams = ({
 
       {isVDRRoom && <VirtualDataRoomBlock t={t} />}
 
-      {canOwnerChange && roomParams.roomOwner && (
+      {canChangeRoomOwner && roomParams.roomOwner && (
         <div>
           <Text fontWeight={600} fontSize="13px">
             {t("Files:RoomOwner")}
