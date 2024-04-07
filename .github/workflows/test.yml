@@ -26,5 +26,10 @@ jobs:
           find . -name "packages.json" -path "./packages/*/packages.json" | while read file; do
             # Update the version in packages.json
             sed -i "s/\"version\": \"2.5.0\"/\"version\": \"$branch_name\"/" "$file"
+            
+            # Output the file name and the change made
+            echo "Updated $file with version $branch_name"
+            
+            # Output the updated contents of the file
+            cat "$file"
           done
-          cat packages/client/packages.json
