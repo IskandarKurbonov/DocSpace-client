@@ -1,1 +1,29 @@
 name: Change version in packages
+
+on:
+    create:
+    push:
+
+jobs:
+    change-version:
+        name: "Change version in packages"
+        runs-on: ubuntu-latest
+        steps:
+
+          - name: Checkout
+            uses: actions/checkout@v4
+            with:
+                ref: ${{github.ref}}
+
+          - name: Filter changes
+            if: (startsWith(github.ref, 'refs/heads/release/') ||
+             startsWith(github.ref, 'refs/heads/hotfix/'))
+            uses: dorny/paths-filter@v2
+            id: changes
+            with:
+              working-directory: 'DocSpace-client'
+              base: ${{github.ref}}
+              initial-fetch-depth: '1'
+              filters: |
+                help_modified:
+                  - added|deleted|modified: '**/packages/*/packages.json'          
