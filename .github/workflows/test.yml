@@ -27,4 +27,4 @@ jobs:
             # Update the version in packages.json
             sed -i "s/\"version\": \"2.5.0\"/\"version\": \"$branch_name\"/" "$file"
           done
-          cat ./packages/*/packages.json
+          cat ./packages/client/packages.json
