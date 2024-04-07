@@ -23,6 +23,7 @@ jobs:
           sed -i "s/\"version\": \"[0-9.]*\"/\"version\": \"$VERSION\"/g" packages/*/package.json 
 
       - name: Commit and push changes
+        if: steps.change-version.outputs.changed == 'true'
         run: |
           git config --global user.name "IskandarKurbonov"
           git config --global user.email "${{secrets.MAIL}}"
