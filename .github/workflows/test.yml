@@ -32,3 +32,6 @@ jobs:
             # Output the updated contents of the file
             cat "$file" 
           done
+
+          echo $file
+          echo $branch_name
