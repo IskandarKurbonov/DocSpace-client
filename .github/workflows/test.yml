@@ -1,28 +1,30 @@
 name: Change version in packages
 
 on:
-    create:
-    push:
+  create:
+  push:
+    branches:
+      - 'release/**'
+      - 'hotfix/**'
 
 jobs:
-    change-version:
-        name: "Change version in packages"
-        runs-on: ubuntu-latest
-        steps:
+  change-version:
+    name: "Change version in packages"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-          - name: Checkout
-            uses: actions/checkout@v4
-            with:
-                ref: ${{github.ref}}
-
-          - name: Filter changes
-            if: (startsWith(github.ref, 'refs/heads/release/') ||
+      - name: Filter changes and update versions
+        if: (startsWith(github.ref, 'refs/heads/release/') ||
              startsWith(github.ref, 'refs/heads/hotfix/'))
-            uses: dorny/paths-filter@v2
-            id: changes
-            with:
-              base: ${{github.ref}}
-              initial-fetch-depth: '1'
-              filters: |
-                help_modified:
-                  - added|deleted|modified: '**/packages/*/packages.json'          
+        run: |
+          # Get the branch name
+          branch_name=$(echo "${{ github.ref }}" | cut -d'/' -f3-)
+
+          # Find all packages.json files and update versions
+          find . -name "packages.json" -path "./packages/*/packages.json" | while read file; do
+            # Update the version in packages.json
+            sed -i "s/\"version\": \"2.5.0\"/\"version\": \"$branch_name\"/" "$file"
+          done
+          cat ./packages/*/packages.json
