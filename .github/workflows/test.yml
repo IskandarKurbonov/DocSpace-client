@@ -25,7 +25,7 @@ jobs:
       - name: Commit and push changes
         run: |
           git config --global user.name "IskandarKurbonov"
-          git config --global user.email "${{secretes.MAIL}}"
+          git config --global user.email "${{secrets.MAIL}}"
           git add .
           git commit -m "Update version in packages.json"
           git push
