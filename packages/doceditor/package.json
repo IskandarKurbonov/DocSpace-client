@@ -1,6 +1,6 @@
 {
   "name": "@docspace/doceditor",
-  "version": "2.5.0",
+  "version": "10.0.0",
   "private": true,
   "scripts": {
     "build": "node ./scripts/buildTranslations.js && next build",
