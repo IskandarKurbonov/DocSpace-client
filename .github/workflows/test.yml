@@ -2,10 +2,6 @@ name: Change version in packages
 
 on:
   create:
-  push:
-    branches:
-      - 'release/**'
-      - 'hotfix/**'
 
 jobs:
   change-version:
