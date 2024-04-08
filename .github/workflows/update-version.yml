@@ -8,6 +8,8 @@ on:
 
 jobs:
   change-version:
+    if: (startsWith(github.ref, 'refs/heads/release/') ||
+         startsWith(github.ref, 'refs/heads/hotfix/'))    
     name: "Update packages versions"
     runs-on: ubuntu-latest
     steps:
