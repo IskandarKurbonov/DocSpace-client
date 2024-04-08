@@ -13,18 +13,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: '${{ github.token }}'
 
       - name: Filter changes and update versions
         id: update-versions
         run: |
           VERSION=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/[^0-9.]*//g')
-          jq --arg version "$VERSION" '.version = $version' packages/*/package.json
+          sed -i "s/\(\"version\": \)\"[0-9.]*\"/\1\"$VERSION\"/g" packages/*/packages.json
           git diff --exit-code --quiet || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit and push changes
         uses: EndBug/add-and-commit@v9
         with:
-          author_name: 'ONLYOFFICE'
+          author_name: 'IskandarKurbonov'
           author_email: '${{secrets.MAIL}}'
           message: 'Update version in package.json'
           add: '.'
