@@ -20,7 +20,7 @@ jobs:
         id: update-versions
         run: |
           VERSION=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/[^0-9.]*//g')
-          sed -i "s/\"version\":.*/\"version\": \"$VERSION\",/g" packages/*/package.json
+          sed -i "s/\(\"version\":\).*/\1 \"$VERSION\",/g" packages/*/package.json
           git diff --exit-code --quiet || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit and push changes
