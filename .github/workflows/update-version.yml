@@ -19,7 +19,7 @@ jobs:
       - name: Filter changes and update versions
         id: update-versions
         run: |
-          VERSION=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/[^0-9.]*//g') >> $GITHUB_ENV
+          echo VERSION=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/[^0-9.]*//g') >> $GITHUB_ENV
           sed -i "s/\(\"version\":\).*/\1 \"$VERSION\",/g" packages/*/package.json
           git diff --exit-code --quiet || echo "changed=true" >> $GITHUB_OUTPUT
 
