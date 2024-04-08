@@ -18,14 +18,20 @@ jobs:
         id: update-versions
         run: |
           VERSION=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/[^0-9.]*//g')
-          sed -i "s/\(\"version\": \)\"[0-9.]*\"/\1\"$VERSION\"/g" packages/*/package.json
+          jq --arg version "$VERSION" '.version = $version' packages/*/packages.json
           git diff --exit-code --quiet || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit and push changes
-        if: steps.update-versions.outputs.changed == 'true'
-        run: |
-          git config --global user.name "ONLYOFFICE"
-          git config --global user.email "${{secrets.MAIL}}"
-          git add .
-          git commit -m "Update version in packages.json"
-          git push
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Update version in package.json'
+          add: '.'
+
+          #      - name: Commit and push changes
+          #        if: steps.update-versions.outputs.changed == 'true'
+          #        run: |
+          #          git config --global user.name "ONLYOFFICE"
+          #          git config --global user.email "${{secrets.MAIL}}"
+          #          git add .
+          #          git commit -m "Update version in packages.json"
+          #          git push
