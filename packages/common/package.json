@@ -1,6 +1,6 @@
 {
   "name": "@docspace/common",
-  "version": "2.0.5",
+  "version": "",
   "private": true,
   "scripts": {
     "build": "echo 'skip it'",
