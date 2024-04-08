@@ -24,8 +24,11 @@ jobs:
       - name: Commit and push changes
         uses: EndBug/add-and-commit@v9
         with:
+          author_name: 'ONLYOFFICE'
+          author_email: '${{secrets.MAIL}}'
           message: 'Update version in package.json'
           add: '.'
+          cwd: '.'
 
           #      - name: Commit and push changes
           #        if: steps.update-versions.outputs.changed == 'true'
